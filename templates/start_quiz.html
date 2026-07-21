@@ -1,0 +1,331 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ quiz.title }}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/start_quiz.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container-fluid py-4">
+
+    <div class="row">
+
+        <!-- LEFT SIDE -->
+
+        <div class="col-lg-8">
+
+            <!-- Questions yaha aayenge -->
+             
+            <div class="quiz-header">
+
+    <span class="badge bg-primary fs-6 mb-3">
+        {{ quiz.subject }}
+    </span>
+
+    <h1 class="quiz-title">
+        {{ quiz.title }}
+    </h1>
+
+    <p class="quiz-description">
+        {{ quiz.description }}
+    </p>
+
+</div>
+
+<form method="POST" id="quizForm">
+{% csrf_token %}
+
+{% for question in questions %}
+
+<div class="card quiz-card">
+
+    <div class="card-body">
+
+        <h5 class="fw-bold mb-4">
+
+<span class="badge bg-primary me-2 fs-6">
+    Q{{ forloop.counter }}
+</span>
+
+{{ question.question }}
+
+</h5>
+
+        <div class="option-box">
+
+    <div class="form-check">
+
+        <input
+            class="form-check-input"
+            type="radio"
+            name="q{{ question.id }}"
+            value="1">
+
+        <label class="form-check-label ms-2">
+
+            {{ question.option1 }}
+
+        </label>
+
+    </div>
+
+</div>
+
+        <div class="option-box">
+
+    <div class="form-check">
+
+        <input
+            class="form-check-input"
+            type="radio"
+            name="q{{ question.id }}"
+            value="2">
+
+        <label class="form-check-label ms-2">
+
+            {{ question.option2 }}
+
+        </label>
+
+    </div>
+
+</div>
+
+        <div class="option-box">
+
+    <div class="form-check">
+
+        <input
+            class="form-check-input"
+            type="radio"
+            name="q{{ question.id }}"
+            value="3">
+
+        <label class="form-check-label ms-2">
+
+            {{ question.option3 }}
+
+        </label>
+
+    </div>
+
+</div>
+
+        <div class="option-box">
+
+    <div class="form-check">
+
+        <input
+            class="form-check-input"
+            type="radio"
+            name="q{{ question.id }}"
+            value="4">
+
+        <label class="form-check-label ms-2">
+
+            {{ question.option4 }}
+
+        </label>
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+<div class="submit-section">
+
+    <button
+        type="submit"
+        class="btn submit-btn">
+
+        <i class="bi bi-check-circle-fill"></i>
+
+        Submit Quiz
+
+    </button>
+
+</div>
+
+</form>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-4">
+
+            <div class="card quiz-card exam-panel">
+
+    <div class="card-body text-center">
+
+        <h3 class="panel-title">
+    📝 Exam Panel
+</h3>
+
+        <hr>
+
+        <div class="d-flex justify-content-between mb-3">
+
+    <span>Total Questions</span>
+
+    <span class="fw-bold text-primary">
+        {{ questions|length }}
+    </span>
+
+</div>
+
+<div class="d-flex justify-content-between mb-3">
+
+    <span>Answered</span>
+
+   <span id="answeredCount"
+      class="counter success-counter">
+
+    0
+
+</span>
+
+</div>
+
+<div class="d-flex justify-content-between mb-4">
+
+    <span>Remaining</span>
+
+   <span id="remainingCount"
+      class="counter danger-counter">
+
+    {{ questions|length }}
+
+</span>
+
+</div>
+
+<hr>
+
+<h5 class="text-center">
+    ⏱ Time Left
+</h5>
+
+
+<h2 id="timer" class="timer">
+
+    15:00
+
+</h2>
+
+<hr>
+
+<p class="text-success fw-bold text-center">
+
+✅ Answer all questions before submitting.
+
+</p>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    
+<script>
+
+let timeLeft = 15 * 60;
+
+const timer = document.getElementById("timer");
+
+const countdown = setInterval(function () {
+
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+    timer.innerHTML = minutes + ":" + seconds;
+
+    // Last 1 minute → timer red
+    if(timeLeft <= 60){
+        timer.style.color = "#dc3545";
+    }
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+
+        clearInterval(countdown);
+
+        alert("Time is over! Quiz will be submitted.");
+
+        document.getElementById("quizForm").submit();
+    }
+
+}, 1000);
+
+
+document.getElementById("quizForm").addEventListener("submit", function(e){
+
+    let confirmSubmit = confirm(
+        "Are you sure you want to submit the quiz?"
+    );
+
+    if(!confirmSubmit){
+        e.preventDefault();
+    }
+
+});
+
+
+// Live Answer Counter
+
+const radios = document.querySelectorAll('input[type="radio"]');
+
+function updateAnswerCount() {
+
+    const answeredQuestions = new Set();
+
+    radios.forEach((radio) => {
+
+        if (radio.checked) {
+            answeredQuestions.add(radio.name);
+        }
+
+    });
+
+    document.getElementById("answeredCount").innerHTML =
+        answeredQuestions.size;
+
+    document.getElementById("remainingCount").innerHTML =
+        {{ questions|length }} - answeredQuestions.size;
+
+}
+
+radios.forEach((radio) => {
+
+    radio.addEventListener("change", updateAnswerCount);
+
+});
+
+</script>
+
+
+{% endblock %}
+

@@ -1,0 +1,375 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+
+Dashboard
+
+{% endblock %}
+
+{% block css %}
+
+
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Dashboard Layout -->
+
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+
+    
+    <aside class="sidebar">
+
+
+        <div class="logo">
+    <i class="bi bi-mortarboard-fill"></i>
+    <span>Smart Quiz</span>
+</div>
+
+<div class="profile">
+
+    <div class="avatar">
+        {{ request.user.username|first|upper }}
+    </div>
+
+    <h5>{{ request.user.username }}</h5>
+
+    <span class="status">
+        <i class="bi bi-circle-fill"></i>
+        Online
+    </span>
+
+</div>
+
+<nav>
+
+    <a href="{% url 'dashboard' %}" class="active">
+        <i class="bi bi-grid-1x2-fill"></i>
+        Dashboard
+    </a>
+
+    <a href="{% url 'quiz_list' %}">
+        <i class="bi bi-journal-bookmark-fill"></i>
+        Quizzes
+    </a>
+
+    <a href="{% url 'results' %}">
+        <i class="bi bi-bar-chart-fill"></i>
+        Results
+    </a>
+
+</nav>
+
+<form method="POST" action="{% url 'logout' %}" class="logout">
+    {% csrf_token %}
+    <button class="logout-btn">
+        <i class="bi bi-box-arrow-right"></i>
+        Logout
+    </button>
+</form>
+
+    </aside>
+
+    <!-- Main Content -->
+
+
+    
+    <main class="main-content">
+
+
+<div class="topbar">
+
+    <div class="search-box">
+
+    <form method="GET"
+          action="{% url 'quiz_list' %}"
+          class="d-flex w-100">
+
+        <input
+            type="text"
+            name="q"
+            placeholder="Search quizzes..."
+            value="{{ request.GET.q }}"
+            class="form-control me-2">
+
+        <button
+            type="submit"
+            class="btn btn-primary">
+
+            <i class="bi bi-search"></i>
+
+        </button>
+
+    </form>
+
+</div>
+
+    <div class="topbar-right">
+
+        
+
+        <div class="user-info">
+
+    <div class="user-avatar">
+        {{ request.user.username|first|upper }}
+    </div>
+
+    <div class="user-details">
+
+        <h6 class="mb-1">
+            {{ request.user.username|title }}
+        </h6>
+
+        <small class="text-muted">
+            Python Developer
+        </small>
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+
+        <div class="welcome-section">
+
+    <h1>
+        Welcome back,
+        <span>{{ request.user.username }}</span> 👋
+    </h1>
+
+    <p>
+        Track your progress, attempt quizzes and improve your performance.
+    </p>
+
+</div>
+
+
+<div class="quick-actions">
+
+    <a href="{% url 'quiz_list' %}" class="action-card">
+
+        <i class="bi bi-play-circle-fill"></i>
+
+        <span>Start Quiz</span>
+
+    </a>
+
+    <a href="{% url 'results' %}" class="action-card">
+
+        <i class="bi bi-bar-chart-fill"></i>
+
+        <span>View Results</span>
+
+    </a>
+
+</div>
+
+<div class="stats-grid">
+
+    <div class="stat-card blue">
+
+        <div>
+            <h5>Total Quizzes</h5>
+            <h2>{{ total_quizzes }}</h2>
+        </div>
+
+        <i class="bi bi-journal-bookmark-fill"></i>
+
+    </div>
+
+    <div class="stat-card green">
+
+        <div>
+            <h5>Completed</h5>
+            <h2>{{ completed }}</h2>
+        </div>
+
+        <i class="bi bi-check-circle-fill"></i>
+
+    </div>
+
+    <div class="stat-card orange">
+
+        <div>
+            <h5>Average Score</h5>
+            <h2>{{ average }}</h2>
+        </div>
+
+        <i class="bi bi-graph-up-arrow"></i>
+
+    </div>
+
+</div>
+
+<div class="info-grid">
+
+    <div class="info-card red">
+
+        <div class="info-top">
+            <span>🏆 Highest Score</span>
+        </div>
+
+        <h2>{{ highest_score }}</h2>
+
+    </div>
+
+    <div class="info-card purple">
+
+        <div class="info-top">
+            <span>📚 Latest Quiz</span>
+        </div>
+
+        <h2>{{ latest_quiz }}</h2>
+
+    </div>
+
+</div>
+
+<div class="analytics-card">
+
+    <div class="card-header">
+        <h3>📊 Quiz Analytics</h3>
+    </div>
+
+    <div class="chart-box">
+        <canvas id="quizChart"></canvas>
+    </div>
+
+</div>
+
+<div class="progress-card">
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <h4>Your Progress</h4>
+
+        <span>{{ average }}</span>
+
+    </div>
+
+    <div class="progress mt-3" style="height:12px;">
+
+        <div class="progress-bar bg-success"
+             role="progressbar"
+             style="width:{{ average }};">
+
+        </div>
+
+    </div>
+
+    <p class="mt-3 text-muted">
+        Keep attempting quizzes to improve your score.
+    </p>
+
+</div>
+
+<div class="table-card">
+
+    <div class="card-header">
+        <h3>📋 Recent Quiz History</h3>
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table align-middle">
+
+            <thead>
+                <tr>
+                    <th>Quiz</th>
+                    <th>Score</th>
+                    <th>Percentage</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for result in results|slice:":5" %}
+
+                <tr>
+                    <td>{{ result.quiz.title }}</td>
+                    <td>{{ result.score }}</td>
+                    <td>{{ result.percentage }}%</td>
+                    <td>{{ result.submitted_at|date:"d M Y" }}</td>
+                </tr>
+
+            {% empty %}
+
+                <tr>
+                    <td colspan="4" class="text-center">
+                        No quizzes attempted yet.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+    </main>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx=document.getElementById("quizChart");
+
+new Chart(ctx,{
+
+type:"doughnut",
+
+data:{
+
+labels:["Completed","Remaining"],
+
+datasets:[{
+
+data:[
+{{ completed }},
+{{ total_quizzes }}-{{ completed }}
+],
+
+backgroundColor:[
+"#2563eb",
+"#e5e7eb"
+],
+
+borderWidth:0,
+
+cutout:"72%"
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+maintainAspectRatio:false
+
+}
+
+});
+
+</script>
+
+{% endblock %}

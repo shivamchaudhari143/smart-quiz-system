@@ -1,0 +1,92 @@
+body{
+    background:#f5f7fb;
+}
+
+.results-card{
+    border:none;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+.results-header{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff;
+    padding:22px 30px;
+}
+
+.results-header h2{
+    margin:0;
+    font-size:30px;
+    font-weight:700;
+}
+
+.table{
+    margin-bottom:0;
+}
+
+.table thead th{
+    background:#eff6ff;
+    color:#1e293b;
+    font-weight:700;
+    border:none;
+}
+
+.table tbody td{
+    vertical-align:middle;
+}
+
+.table tbody tr:hover{
+    background:#f8fbff;
+}
+
+
+
+
+/* ==========================
+   Summary Cards
+========================== */
+
+.summary-card{
+    border:none;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.summary-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.summary-card .card-body{
+    padding:30px;
+}
+
+.summary-card h6{
+    color:#64748b;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.summary-card h2{
+    font-size:38px;
+    font-weight:700;
+}
+
+/* ==========================
+   Search Box
+========================== */
+
+#searchInput{
+    border-radius:50px;
+    padding:14px 20px;
+    border:2px solid #e2e8f0;
+    box-shadow:none;
+    transition:.3s;
+}
+
+#searchInput:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}

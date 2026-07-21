@@ -1,0 +1,201 @@
+body{
+    background:#f5f7fb;
+}
+
+.quiz-card{
+    border:none;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.exam-panel{
+    position:sticky;
+    top:90px;
+}
+
+.option-box{
+    border:2px solid #e2e8f0;
+    border-radius:14px;
+    padding:16px 18px;
+    margin-bottom:15px;
+    cursor:pointer;
+    transition:.3s;
+    background:#fff;
+}
+
+.option-box:hover{
+    background:#f8fbff;
+    border-color:#2563eb;
+    transform:translateX(4px);
+}
+
+.option-box:has(.form-check-input:checked){
+    background:#eff6ff;
+    border-color:#2563eb;
+}
+
+.form-check-input{
+    transform:scale(1.25);
+    margin-top:4px;
+    cursor:pointer;
+}
+
+.form-check-input:checked{
+    background-color:#0d6efd;
+    border-color:#0d6efd;
+}
+
+.option-box:has(.form-check-input:checked){
+    background:#e7f1ff;
+    border-color:#0d6efd;
+}
+
+
+/* ==========================
+   Quiz Header
+========================== */
+
+.quiz-header{
+    margin-bottom:35px;
+}
+
+.quiz-title{
+    font-size:38px;
+    font-weight:700;
+    color:#1e293b;
+    margin-top:10px;
+}
+
+.quiz-description{
+    color:#64748b;
+    font-size:17px;
+    margin-top:10px;
+    line-height:1.7;
+}
+
+
+
+/* ==========================
+   Exam Panel
+========================== */
+
+.exam-panel{
+    position: sticky;
+    top: 100px;
+    border:none;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.panel-title{
+    font-size:28px;
+    font-weight:700;
+    color:#1e293b;
+    margin-bottom:25px;
+}
+
+.exam-panel hr{
+    margin:20px 0;
+}
+
+.exam-panel span{
+    font-size:16px;
+}
+
+.exam-panel h2{
+    font-size:42px;
+}
+
+
+
+
+/* ==========================
+   Question Card
+========================== */
+
+.quiz-card{
+    border:none;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.quiz-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+}
+
+.quiz-card .card-body{
+    padding:30px;
+}
+
+.quiz-card h5{
+    font-size:22px;
+    font-weight:600;
+    color:#1e293b;
+    line-height:1.6;
+}
+
+
+
+
+
+/* ==========================
+   Submit Button
+========================== */
+
+.submit-section{
+    text-align:center;
+    margin:40px 0;
+}
+
+.submit-btn{
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:#fff;
+    border:none;
+    border-radius:50px;
+    padding:15px 45px;
+    font-size:18px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(34,197,94,.35);
+}
+
+
+
+/* ==========================
+   Timer
+========================== */
+
+.timer{
+    font-size:42px;
+    font-weight:700;
+    color:#dc2626;
+    letter-spacing:2px;
+    text-align:center;
+    margin:15px 0;
+}
+
+
+
+/* ==========================
+   Counter
+========================== */
+
+.counter{
+    font-size:18px;
+    font-weight:700;
+}
+
+.success-counter{
+    color:#16a34a;
+}
+
+.danger-counter{
+    color:#dc2626;
+}

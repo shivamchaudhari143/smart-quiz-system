@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+register
+
+{% endblock %}
+
+
+{% block css %}
+
+<style>
+        body{
+            background:#f4f7fc;
+        }
+
+        .register-card{
+            margin-top:70px;
+            border:none;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,.15);
+        }
+    </style>
+
+{% endblock %}
+
+    
+{% block content %}
+
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="card register-card">
+
+<div class="card-body p-4">
+
+<h2 class="text-center mb-4">
+Create Account
+</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+{% if form.errors %}
+
+<div class="alert alert-danger">
+
+    <strong>Please fix the following errors:</strong>
+
+    {{ form.errors }}
+
+</div>
+
+{% endif %}
+
+{{ form.as_p }}
+
+<div class="d-grid">
+
+<button class="btn btn-success">
+Register
+</button>
+
+</div>
+
+</form>
+
+<div class="text-center mt-3">
+
+Already have an account?
+
+<a href="{% url 'login' %}">
+Login
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock  %}
+
+
+

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Result Details
+{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/result_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card detail-card">
+
+        <div class="detail-header">
+
+            <h2 class="mb-0">
+                📊 Result Details
+            </h2>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>Quiz</th>
+                    <td>
+
+    <span class="badge bg-dark fs-6">
+
+        {{ result.quiz.title }}
+
+    </span>
+
+</td>
+                </tr>
+
+                <tr>
+                    <th>Score</th>
+                    <td>{{ result.score }}/{{ result.total_questions }}</td>
+                </tr>
+
+                <tr>
+                    <th>Percentage</th>
+                    <td>
+
+    <span class="badge bg-primary fs-6">
+
+        {{ percentage }}%
+
+    </span>
+
+</td>
+                </tr>
+
+                <tr>
+
+    <th>Status</th>
+    
+
+    <td>
+
+        {% if percentage >= 80 %}
+
+            <span class="badge bg-success fs-6">
+                🏆 Excellent
+            </span>
+
+        {% elif percentage >= 50 %}
+
+            <span class="badge bg-warning text-dark fs-6">
+                👍 Good
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-danger fs-6">
+                📚 Needs Improvement
+            </span>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <th>Correct Answers</th>
+
+    <td>
+        <span class="badge bg-success fs-6">
+            {{ correct_answers }}
+        </span>
+    </td>
+
+</tr>
+
+<tr>
+
+    <th>Wrong Answers</th>
+
+    <td>
+        <span class="badge bg-danger fs-6">
+            {{ wrong_answers }}
+        </span>
+    </td>
+
+</tr>
+
+                <tr>
+                    <th>Date</th>
+                    <td>{{ result.submitted_at|date:"d M Y, h:i A" }}</td>
+                </tr>
+
+            </table>
+
+            <a href="{% url 'results' %}" class="btn btn-primary back-btn">
+                ← Back to Results
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

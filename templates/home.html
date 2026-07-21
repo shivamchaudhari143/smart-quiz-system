@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+    {% block css %}
+    <style>
+
+
+        body{
+            background:linear-gradient(135deg,#0d6efd,#6610f2);
+            min-height:100vh;
+            color:white;
+        }
+
+        .hero{
+            min-height:90vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .feature-box{
+            background:rgba(255,255,255,.15);
+            padding:20px;
+            border-radius:15px;
+            backdrop-filter:blur(8px);
+            transition:.3s;
+            box-shadow:0 10px 30px rgba(0,0,0,.20);
+        }
+
+        .feature-box:hover{
+            transform:translateY(-10px) scale(1.03);
+            box-shadow:0 20px 40px rgba(0,0,0,.30);
+        }
+
+        .btn-custom{
+            padding:12px 35px;
+            font-size:18px;
+            border-radius:30px;
+            transition:.3s;
+        }
+
+        .btn-custom:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(0,0,0,.25);
+}
+
+
+
+
+    </style>
+    {% endblock %}
+
+
+    {% block content %}
+
+<div class="container hero">
+
+<div class="text-center">
+
+<h1 class="display-3 fw-bold">
+
+Learn.
+Practice.
+Improve.
+
+</h1>
+
+<p class="lead mt-4">
+
+Online Examination System with Instant Results,
+Performance Analytics and Certificates.
+
+</p>
+
+<div class="mt-5">
+
+{% if user.is_authenticated %}
+
+<a href="{% url 'dashboard' %}"
+   class="btn btn-warning btn-custom">
+
+    <i class="bi bi-speedometer2"></i>
+
+    Go to Dashboard
+
+</a>
+
+{% else %}
+
+<a href="{% url 'login' %}"
+   class="btn btn-warning btn-custom me-3">
+
+    <i class="bi bi-box-arrow-in-right"></i>
+
+    Login
+
+</a>
+
+<a href="{% url 'register' %}"
+   class="btn btn-outline-light btn-custom">
+
+    <i class="bi bi-person-plus-fill"></i>
+
+    Register
+
+</a>
+
+
+
+
+{% endif %}
+
+</div>
+
+{% if user.is_authenticated %}
+
+<div class="alert alert-success text-center mt-4">
+
+    👋 Welcome back <strong>{{ user.username|title }}</strong>!
+    Continue your learning from your dashboard.
+
+</div>
+
+{% endif %}
+
+<div class="row mt-5">
+
+<div class="col-md-4">
+
+<div class="feature-box">
+
+<h2>📝</h2>
+
+<h5>Online Quiz</h5>
+
+<p>Attempt quizzes anytime.</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="feature-box">
+
+<h2>📊</h2>
+
+<h5>Analytics</h5>
+
+<p>Track your performance.</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="feature-box">
+
+<h2>🏆</h2>
+
+<h5>Certificate</h5>
+
+<p>Download PDF certificate.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="container my-5">
+
+    <div class="row text-center g-4">
+
+        <div class="col-md-3 col-6">
+            <div class="feature-box">
+                <h2 class="fw-bold text-warning">50+</h2>
+                <p class="mb-0">Questions</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="feature-box">
+                <h2 class="fw-bold text-warning">5</h2>
+                <p class="mb-0">Subjects</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="feature-box">
+                <h2 class="fw-bold text-warning">15 Min</h2>
+                <p class="mb-0">Live Timer</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="feature-box">
+                <h2 class="fw-bold text-warning">PDF</h2>
+                <p class="mb-0">Certificate</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<section class="container py-5">
+
+<h2 class="text-center text-white fw-bold mb-5">
+Why Choose Smart Quiz?
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="feature-box text-center">
+<i class="bi bi-shield-lock-fill display-3 text-warning"></i>
+<h4>Secure Login</h4>
+<p>Authentication system using Django.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box text-center">
+<i class="bi bi-stopwatch-fill display-3 text-warning"></i>
+<h4>Live Timer</h4>
+<p>Time-based quiz with auto submit.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box text-center">
+<i class="bi bi-bar-chart-fill display-3 text-warning"></i>
+<h4>Analytics</h4>
+<p>Performance tracking dashboard.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box text-center">
+<i class="bi bi-award-fill display-3 text-warning"></i>
+<h4>Certificate</h4>
+<p>Download certificate after completion.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box text-center">
+<i class="bi bi-journal-bookmark-fill display-3 text-warning"></i>
+<h4>5 Subjects</h4>
+<p>Python, DBMS, HTML, CSS & JavaScript.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box text-center">
+<i class="bi bi-lightning-charge-fill display-3 text-warning"></i>
+<h4>Instant Result</h4>
+<p>Score and percentage immediately.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<footer class="text-center text-white py-5 mt-4">
+
+    <hr class="border-light opacity-25">
+
+    <p class="mb-1 fw-semibold">
+        © 2026 Smart Quiz System
+    </p>
+
+    <small class="text-light opacity-75">
+        Designed & Developed by <strong>Shivam Chaudhari</strong>
+    </small>
+
+</footer>
+
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Quiz List
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container py-5">
+
+    
+
+                    
+<div class="quiz-header">
+
+    <h1>📚 Available Quizzes</h1>
+
+    <p>
+        Select a quiz and test your knowledge with real-time scoring.
+    </p>
+
+</div>
+
+<div class="search-box">
+
+    <form method="GET" class="search-form">
+
+        <div class="search-input">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                name="q"
+                value="{{ request.GET.q }}"
+                placeholder="Search quizzes by title...">
+
+        </div>
+
+        <button type="submit" class="search-btn">
+
+            Search
+
+        </button>
+
+    </form>
+
+</div>
+
+{% if query %}
+
+<p class="text-center text-muted mt-3">
+
+Showing <strong>{{ quiz_count }}</strong> result{{ quiz_count|pluralize }}
+for "<strong>{{ query }}</strong>"
+
+</p>
+
+{% endif %}
+<div class="row">
+
+{% for quiz in quizzes %}
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+<div class="card quiz-card">
+
+<div class="card-body">
+<h3 class="quiz-title">
+    {{ quiz.title }}
+</h3>
+
+<span class="badge bg-primary mb-3 fs-6">
+    📘 {{ quiz.subject }}
+</span>
+
+
+
+<p class="quiz-desc">
+    {{ quiz.description }}
+</p>
+
+
+<div class="question-count">
+    <i class="bi bi-ui-checks-grid"></i>
+    {{ quiz.question_set.count }} Questions
+</div>
+
+<div class="quiz-meta">
+
+    <span>
+        <i class="bi bi-clock"></i>
+        {{ quiz.duration }} Min
+    </span>
+
+    <span>
+        <i class="bi bi-patch-check-fill"></i>
+        {{ quiz.total_marks }} Marks
+    </span>
+
+</div>
+
+<a href="{% url 'start_quiz' quiz.id %}"
+   class="btn btn-primary start-btn w-100 rounded-pill">
+
+    <i class="bi bi-play-fill"></i>
+
+    Start Quiz
+
+</a>
+
+
+
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card profile-card">
+
+        <div class="profile-header text-center">
+
+            <h2>
+                👤 {{ user.username|title }}
+            </h2>
+
+            <p class="text-muted mb-0">
+                Member since {{ user.date_joined|date:"d M Y" }}
+            </p>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row text-center">
+
+                <div class="col-md-3 mb-3">
+
+                    <div class="stat-card">
+
+                        <h3>{{ total_attempts }}</h3>
+
+                        <p>Total Attempts</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <div class="stat-card">
+
+                        <h3>{{ highest_score }}%</h3>
+
+                        <p>Highest Score</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <div class="stat-card">
+
+                        <h3>{{ average_percentage }}%</h3>
+
+                        <p>Average Score</p>
+
+                    </div>
+
+
+
+                    
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+    <div class="stat-card">
+
+        <h3>{{ certificates }}</h3>
+
+        <p>Certificates</p>
+
+    </div>
+
+</div>
+
+<div class="text-center mt-4 mb-3">
+
+    <a href="{% url 'dashboard' %}"
+       class="btn btn-primary me-3">
+
+        🏠 Dashboard
+
+    </a>
+
+    <a href="{% url 'password_change' %}"
+       class="btn btn-warning">
+
+        🔑 Change Password
+
+    </a>
+
+</div>
+
+                
+
+            </div>
+            
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+ 
+
+{% endblock %}

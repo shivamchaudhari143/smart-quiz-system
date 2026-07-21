@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Quiz Result
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/result.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card result-card">
+
+        <div class="result-header">
+
+    <div class="result-icon">
+        🎉
+    </div>
+
+    <h1 class="result-title">
+        Quiz Completed
+    </h1>
+
+    <h3 class="quiz-name">
+        {{ quiz.title }}
+    </h3>
+
+</div>
+
+        <div class="score-section">
+
+    <h4>Your Score</h4>
+
+    <h1 class="score">
+        {{ score }} / {{ total }}
+    </h1>
+
+    <div class="percentage-badge">
+
+        {{ percentage }}%
+
+    </div>
+
+</div>
+<div class="result-alert alert-{{ alert_class }}">
+
+    <h4>{{ message }}</h4>
+
+    {% if alert_class == "success" %}
+        <p>🎉 Excellent performance! Keep it up.</p>
+
+    {% elif alert_class == "info" %}
+        <p>👏 Good job! A little more practice will improve your score.</p>
+
+    {% else %}
+        <p>💪 Keep practicing. You'll do even better next time.</p>
+
+    {% endif %}
+
+</div>
+
+
+
+        <div class="action-buttons">
+
+    <a href="{% url 'certificate' %}" class="btn action-btn btn-success">
+
+        <i class="bi bi-file-earmark-pdf-fill"></i>
+
+        Download Certificate
+
+    </a>
+
+    <a href="{% url 'dashboard' %}" class="btn action-btn btn-primary">
+
+        <i class="bi bi-speedometer2"></i>
+
+        Back to Dashboard
+
+    </a>
+
+</div>
+ </div>
+
+</div>
+
+{% endblock %}

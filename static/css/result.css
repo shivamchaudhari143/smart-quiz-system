@@ -1,0 +1,135 @@
+body{
+    background:#f5f7fb;
+}
+
+.result-card{
+    border:none;
+    border-radius:24px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    padding:50px;
+    margin-top:40px;
+    transition:.3s;
+}
+
+.result-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
+
+.result-header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.result-icon{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#dcfce7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+    margin:auto;
+}
+
+.result-title{
+    font-size:42px;
+    font-weight:700;
+    color:#16a34a;
+    margin-top:20px;
+}
+
+
+.quiz-name{
+    margin-top:15px;
+    color:#475569;
+}
+
+
+
+/* ==========================
+   Score Section
+========================== */
+
+.score-section{
+    text-align:center;
+    margin:40px 0;
+}
+
+.score-section h4{
+    color:#64748b;
+    font-size:22px;
+}
+
+.score{
+    font-size:70px;
+    font-weight:700;
+    color:#2563eb;
+    margin:20px 0;
+}
+
+.percentage-badge{
+    display:inline-block;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    color:#fff;
+    padding:12px 30px;
+    border-radius:50px;
+    font-size:22px;
+    font-weight:600;
+    margin-top:10px;
+}
+
+
+
+/* ==========================
+   Result Alert
+========================== */
+
+.result-alert{
+    border-radius:18px;
+    padding:25px;
+    margin:35px auto;
+    text-align:center;
+    border:none;
+    max-width:600px;
+    background:#f8fafc;
+    border-left:6px solid #16a34a;
+}
+
+.result-alert h4{
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.result-alert p{
+    margin:0;
+    font-size:17px;
+}
+
+
+
+/* ==========================
+   Action Buttons
+========================== */
+
+.action-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+.action-btn{
+    padding:14px 28px;
+    border-radius:50px;
+    font-size:17px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.action-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}

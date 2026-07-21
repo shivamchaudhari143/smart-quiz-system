@@ -1,0 +1,53 @@
+body{
+    background:#f5f7fb;
+}
+
+.profile-card{
+    border:none;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.profile-header{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff;
+    padding:40px 30px;
+}
+
+.profile-header h2{
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.profile-header p{
+    color:#e5e7eb !important;
+    font-size:16px;
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px 20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.stat-card h3{
+    font-size:36px;
+    font-weight:700;
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.stat-card p{
+    color:#64748b;
+    margin:0;
+    font-size:16px;
+}
