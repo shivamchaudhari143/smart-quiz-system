@@ -5,3 +5,5 @@ pip install -r requirements.txt
 python manage.py collectstatic --noinput
 
 python manage.py migrate --verbosity 2
+
+python manage.py seed_db
