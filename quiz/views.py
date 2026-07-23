@@ -197,9 +197,13 @@ def results(request):
     results = paginator.get_page(page_number)
 
     for result in results:
+     
+     if result.total_questions > 0:
         result.percentage = round(
-           (result.score / result.total_questions) * 100
-    )
+            (result.score / result.total_questions) * 100
+        )
+    else:
+        result.percentage = 0
 
     total_attempts = paginator.count
 
@@ -208,17 +212,19 @@ def results(request):
 
     if total_attempts > 0:
 
-        highest_score = max(
+        if total_attempts > 0:
+
+         percentages = [
         (r.score / r.total_questions) * 100
         for r in all_results
-)
+        if r.total_questions > 0
+    ]
 
-    average_percentage = sum(
-    (r.score / r.total_questions) * 100
-    for r in all_results
-) / total_attempts
+    if percentages:
+        highest_score = max(percentages)
+        average_percentage = sum(percentages) / len(percentages)
 
-    context = {
+        context = {
         'results': results,
         'total_attempts': total_attempts,
         'highest_score': round(highest_score),
